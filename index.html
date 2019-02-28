@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name=viewport content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no">
+	<!-- winphone系统a、input标签被点击时产生的半透明灰色背景怎么去掉 -->
+	<meta name="msapplication-tap-highlight" content="no"> 
+	<title>H5示范</title>
+	<style>
+		*{ margin:0; padding:0; list-style: none;}
+		html,body{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+		.hide{
+			display: none;
+		}
+		.page{
+			width: 100%;
+			height: 100%;
+			position: relative;
+		}
+		.music-btn{
+			width: 34px;
+			height: 34px;
+			background: url(images/music_btn.png);
+			background-size: cover;
+			position: absolute;
+			right: 10px;
+			top: 10px;
+		}
+		.play{
+			animation: act_around 1.8s linear infinite;
+			-moz-animation: act_around 1.8s linear infinite;
+		}
+		@keyframes act_around {
+			form {transform: rotate(0deg);}
+			to{ transform: rotate(360deg); }
+		}
+		@-moz-keyframes act_around {
+			form {-moz-transform: rotate(0deg);}
+			to{ -moz-transform: rotate(360deg); }
+		}		
+	</style>
+	<script type="text/javascript" src="lib/flexible.js"></script>
+	<script type="text/javascript" src="lib/resloader.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div class=""></div>
+		<section calss="page loading" :class="{'hide': loadingPageShow}">
+			<p v-text="loadingProgress+'%'"></p>
+		</section>
+		<div class="music-btn" :class="{'hide': showBgMusic, 'play':musicPlay}" @click="triggerBgMusic">
+			<audio src="https://mp3file1.mafengwo.net/201902281617/714ed729ca8a557b004397680ae8d31e/s13/M00/B1/56/wKgEaVx1OmWASp8PAHRO0QHiXJg103.mp3" preload="auto" loop="loop" id="bgm"></audio>
+		</div>
+		<section class="page formValidate">
+			<div class="form-box">
+				<div class="form-item">
+					<label for="name">姓名: </label>
+					<input type="text" v-model="form.name"placeholder="姓名">
+				</div>
+				<div class="form-item">
+					<label for="name">手机号: </label>
+					<input type="tel" v-model="form.tel" placeholder="手机号" maxlength="11">
+				</div>
+				<div class="form-item">
+					<label for="name">邮件: </label>
+					<input v-model="form.email" type="email" placeholder="邮件">
+				</div>
+				<div class="form-ft"><button class="custom-btn" :disabled="submitBtnDisabled" @click="submitForm">提交信息</button></div>			
+			</div>
+		</section>
+	</div>
+	<script type="text/javascript">
+	//	var mainSite = '{{url('activity/florida2019calendar')}}';//活动主页
+	//	var assetsPath = '{{asset('static/activity/florida2019calendar')}}/';//静态资源路径
+	</script>
+	<script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
